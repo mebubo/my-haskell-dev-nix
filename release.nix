@@ -38,5 +38,8 @@ in with pkgs.hp; {
   aoc2018
   purescript
   spago
+  dhall
+  dhall-json
+  pandoc
   ;
 }
