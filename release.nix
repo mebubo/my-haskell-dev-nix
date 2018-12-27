@@ -16,6 +16,7 @@ let
           repline = self.repline_0_2_0_0;
           dhall = dontCheck self.dhall_1_19_1;
           dhall-json = self.dhall-json_1_2_5;
+          Cabal = self.Cabal_2_4_1_0;
 
           funflow = self.callPackage ../funflow/funflow {};
           funflow-examples = self.callPackage ../funflow/funflow-examples {};
@@ -41,5 +42,6 @@ in with pkgs.hp; {
   dhall
   dhall-json
   pandoc
+  cabal-install
   ;
 }
