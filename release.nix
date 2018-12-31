@@ -4,24 +4,20 @@ let
     packageOverrides = pkgs: {
       hp = compiler.override {
         overrides = self: super: {
-          criterion = self.criterion_1_5_3_0;
-          vector-sized = self.vector-sized_1_2_0_0;
-          haskell-names = self.callPackage ./haskell-names.nix {};
-          singletons = self.singletons_2_5_1;
-          th-desugar = self.th-desugar_1_9;
-          RSA = dontCheck super.RSA;
-          megaparsec = self.megaparsec_7_0_4;
-          protolude = self.protolude_0_2_3;
+          haskell-names = doJailbreak super.haskell-names;
           async-pool = doJailbreak super.async-pool;
-          repline = self.repline_0_2_0_0;
-          dhall = dontCheck self.dhall_1_19_1;
-          dhall-json = self.dhall-json_1_2_5;
-          Cabal = self.Cabal_2_4_1_0;
+          pandoc = doJailbreak super.pandoc;
+          these = doJailbreak super.these;
 
           funflow = self.callPackage ../funflow/funflow {};
           funflow-examples = self.callPackage ../funflow/funflow-examples {};
           advent-of-code-2018 = dontCheck (self.callPackage ../advent-of-code-2018 {});
-          codex = doJailbreak (self.callPackage ../codex {});
+          codex = (self.callPackage ../codex {}).override {
+            Cabal = self.Cabal_2_4_1_0;
+            hackage-db = self.hackage-db.override {
+              Cabal = self.Cabal_2_4_1_0;
+            };
+          };
           aoc2018 = self.callPackage ../adventofcode/2018 {};
           purescript = self.callPackage ../purescript {};
           spago = self.callPackage ../spago {};
@@ -43,5 +39,6 @@ in with pkgs.hp; {
   dhall-json
   pandoc
   cabal-install
+  cabal2nix
   ;
 }
