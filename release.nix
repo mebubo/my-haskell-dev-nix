@@ -6,7 +6,6 @@ let
         overrides = self: super: {
           haskell-names = doJailbreak super.haskell-names;
           async-pool = doJailbreak super.async-pool;
-          pandoc = doJailbreak super.pandoc;
           these = doJailbreak super.these;
 
           funflow = self.callPackage ../funflow/funflow {};
@@ -21,6 +20,9 @@ let
           aoc2018 = self.callPackage ../adventofcode/2018 {};
           purescript = self.callPackage ../purescript {};
           spago = self.callPackage ../spago {};
+          codex-light = (self.callPackage ../codex-light {}).override {
+            Cabal = self.Cabal_2_4_1_0;
+          };
         };
       };
     };
@@ -32,12 +34,12 @@ in with pkgs.hp; {
   funflow-examples
   advent-of-code-2018
   codex
+  codex-light
   aoc2018
   purescript
   spago
   dhall
   dhall-json
-  pandoc
   cabal-install
   cabal2nix
   ;
