@@ -1,5 +1,5 @@
 let
-  compiler = pkgs.haskell.packages.ghc863;
+  compiler = pkgs.haskell.packages.ghc864;
   config = with pkgs.haskell.lib; {
     packageOverrides = pkgs: {
       hp = compiler.override {
@@ -23,6 +23,14 @@ let
           codex-light = (self.callPackage ../codex-light {}).override {
             Cabal = self.Cabal_2_4_1_0;
           };
+          codex-plan = self.callPackage ../codex-plan {};
+          cabal-dependency-licenses = (self.callPackage ../cabal-dependency-licenses {}).override {
+            Cabal = self.Cabal_2_4_1_0;
+          };
+          unison-parser-typechecker = self.callPackage ../unison/parser-typechecker {};
+          guid = self.callPackage ../guid {};
+          funflow-nix = dontCheck (self.callPackage ../funflow-nix {});
+          funflow-example-map-scrapper = self.callPackage ../funflow-example-map-scrapper {};
         };
       };
     };
@@ -35,6 +43,7 @@ in with pkgs.hp; {
   advent-of-code-2018
   codex
   codex-light
+  codex-plan
   aoc2018
   purescript
   spago
@@ -42,5 +51,9 @@ in with pkgs.hp; {
   dhall-json
   cabal-install
   cabal2nix
+  cabal-dependency-licenses
+  unison-parser-typechecker
+  funflow-nix
+  funflow-example-map-scrapper
   ;
 }
